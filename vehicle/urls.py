@@ -3,8 +3,9 @@ from django.urls import path
 from vehicle.apps import VehicleConfig
 from rest_framework.routers import DefaultRouter
 
+from vehicle.serializers import MotoMileageSerializer
 from vehicle.views import CarViewSet, MotoCreateAPIView, MotoListAPIView, MotoRetrieveAPIView, MotoUpdateAPIView, \
-    MotoDestroyAPIView, MileageCreateAPIView
+    MotoDestroyAPIView, MileageCreateAPIView, MotoMileageListAPIView, MileageListAPIView
 
 app_name = VehicleConfig.name
 
@@ -21,4 +22,6 @@ urlpatterns = [
 
                   # Mileage
                   path('mileage_create/', MileageCreateAPIView.as_view(), name='mileage_create'),
+                  path('moto_mileage_list/', MotoMileageListAPIView.as_view(), name='moto_mileage_list'),
+                  path('mileage_list/', MileageListAPIView.as_view(), name='mileage_list'),
               ] + router.urls
