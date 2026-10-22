@@ -3,4 +3,12 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
+    username = None
+    email = models.EmailField(max_length=50, unique=True, verbose_name='Электронная почта')
+
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    def __str__(self):
+        return self.email

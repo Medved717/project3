@@ -1,9 +1,11 @@
 from django.db import models
+from django.conf import settings
 
 
 class Car(models.Model):
     title = models.CharField(max_length=150)
     description = models.TextField(verbose_name='Описание')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Автомобиль'
@@ -18,6 +20,7 @@ class Moto(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название автомобиля',
                              help_text='Введите название автомобиля.')
     description = models.TextField(verbose_name='Описание автомобиля', help_text='Введите описание автомобиля.')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Автомобиль'
