@@ -1,13 +1,17 @@
 from rest_framework import serializers
 
 from vehicle.models import Car, Moto, Mileage
-from vehicle.validators import TitleValidator
+from vehicle.validators import TitleValidator, MinMileageValidator, MaxYearValidator, CarMotoTogetherValidator
 
 
 class MileageSerializer(serializers.ModelSerializer):
+    mileage = serializers.PositiveIntegerField(validators=[MinMileageValidator()])
+    year = serializers.PositiveSmallIntegerField(validators=[MaxYearValidator()])
+
     class Meta:
         model = Mileage
         fields = ('car', 'moto', 'mileage', 'year')
+        validators = [CarMotoTogetherValidator(car_field='car', moto_field='moto')]
 
 
 class CarSerializer(serializers.ModelSerializer):
