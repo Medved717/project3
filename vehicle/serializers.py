@@ -5,8 +5,8 @@ from vehicle.validators import TitleValidator, MinMileageValidator, MaxYearValid
 
 
 class MileageSerializer(serializers.ModelSerializer):
-    mileage = serializers.PositiveIntegerField(validators=[MinMileageValidator()])
-    year = serializers.PositiveSmallIntegerField(validators=[MaxYearValidator()])
+    mileage = serializers.IntegerField(min_value=0, validators=[MinMileageValidator()])
+    year = serializers.IntegerField(min_value=0, validators=[MaxYearValidator()])
 
     class Meta:
         model = Mileage
